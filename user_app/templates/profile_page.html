@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div>
+        <label>Username</label>
+            {{ user.username }}
+        <label>Email</label>
+            {{ user.email }}
+        <label>First name</label>
+            {{ user.first_name }}
+        <label>Last name</label>
+            {{ user.last_name }}
+    </div>
+    <div>
+        <label>Avatar</label>
+        {% if profile.avatar %}
+            <div>
+                <img src="{{profile.avatar.url}}">
+            </div>
+        {% endif %}
+        <label>Bio</label>
+        <p>{{ profile.bio }}</p>
+        <label>Phone</label>
+            {{ profile.phone }}
+        <label>Github</label>
+            {{ profile.github }}
+    </div>
+    <div>
+    <form action="/edit-profile/" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Edit profile">
+    </form>
+    </div>
+</body>
+</html>

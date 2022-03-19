@@ -18,11 +18,17 @@ from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
-
 from publication_app.views import main_page
+from user_app.views import registration_page, authorization_page, profile_page, edit_profile_page
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
+    path('registration/', registration_page),
+    path('authorization/', authorization_page),
+    path('profile/', profile_page),
+    path('edit-profile/', edit_profile_page),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
