@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'publication_app',
     'user_app',
+    'hashtag_app'
 ]
 
 MIDDLEWARE = [
