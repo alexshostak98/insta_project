@@ -24,6 +24,7 @@ from hashtag_app.views import tag_page
 from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, SpectacularAPIView
 from hashtag_app.api.router import api_router as hashtags_router
 from publication_app.api.router import api_router as posts_router
+from media_app.api.router import api_router as media_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,8 +39,9 @@ urlpatterns = [
     path('api/redoc/', SpectacularRedocView.as_view(), name='redoc'),
     path('api/swagger/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
 
-    path('/', include(posts_router.urls)),
-    path('/', include(hashtags_router.urls)),
+    path('', include(posts_router.urls)),
+    path('', include(hashtags_router.urls)),
+    path('', include(media_router.urls)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
