@@ -22,6 +22,11 @@ class PostSerializer(serializers.ModelSerializer):
     hashtag = HashTagSerializer(many=True, read_only=True)
 
     likes_count = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
 
     def get_likes_count(self, instance) -> int:
         return instance.like.count()
+
+
+    def get_comments_count(self, instance) -> int:
+        return instance.comment.count()

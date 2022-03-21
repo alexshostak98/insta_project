@@ -26,6 +26,7 @@ from hashtag_app.api.router import api_router as hashtags_router
 from publication_app.api.router import api_router as posts_router
 from media_app.api.router import api_router as media_router
 from like_app.api.router import api_router as like_router
+from comment_app.api.router import api_router as comment_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('', include(hashtags_router.urls)),
     path('', include(media_router.urls)),
     path('', include(like_router.urls)),
+    path('', include(comment_router.urls)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
