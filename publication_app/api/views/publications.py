@@ -8,6 +8,7 @@ from ...models import Post
 class PostsView(GenericViewSet, ListModelMixin, CreateModelMixin):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(is_public=True)
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['create_date', 'id']
     ordering = ['-create_date']
+    search_fields = ['hashtag__title']
