@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
@@ -22,8 +22,8 @@ from publication_app.views import main_page, add_publication_page
 from user_app.views import registration_page, authorization_page, profile_page, edit_profile_page
 from hashtag_app.views import tag_page
 from drf_spectacular.views import SpectacularRedocView, SpectacularSwaggerView, SpectacularAPIView
-from publication_app.api.views.publications import PostsView
-from hashtag_app.api.views.hashtags import HashTagsView
+from hashtag_app.api.router import api_router as hashtags_router
+from publication_app.api.router import api_router as posts_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,11 +34,12 @@ urlpatterns = [
     path('profile/', profile_page),
     path('edit-profile/', edit_profile_page),
     path('tag/<str:hashtag>/', tag_page),
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/redoc/', SpectacularRedocView.as_view(), name='redoc'),
     path('api/swagger/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
-    path('api/posts/', PostsView.as_view({'get': 'list', 'post': 'create'}), name='api-posts'),
-    path('api/hashtags', HashTagsView.as_view({'get': 'list'}), name='api-hashtags'),
+
+    path('/', include(posts_router.urls)),
+    path('/', include(hashtags_router.urls)),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
