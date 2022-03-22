@@ -19,7 +19,16 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'post', 'profile']
+        fields = ['username', 'post', 'profile', 'followings_count', 'followers_count', ]
 
     # profile = ProfileSerializer(allow_null=False, read_only=True)
     post = PostSerializer(many=True, allow_null=True, read_only=True)
+
+    followings_count = serializers.SerializerMethodField()
+    followers_count = serializers.SerializerMethodField()
+
+    def get_followings_count(self, instance) -> int:
+        return instance.followings.count()
+
+    def get_followers_count(self, instance) -> int:
+        return instance.followers.count()
