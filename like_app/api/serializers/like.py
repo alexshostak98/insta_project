@@ -12,3 +12,17 @@ class LikeSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         source='user'
     )
+
+
+class LikePostSerializer(LikeSerializer):
+    class Meta:
+        model = Like
+        exclude = ['comment']
+        read_only_fields = ['user']
+
+
+class LikeCommentSerializer(LikeSerializer):
+    class Meta:
+        model = Like
+        exclude = ['post']
+        read_only_fields = ['user']
