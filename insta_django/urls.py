@@ -29,6 +29,7 @@ from like_app.api.router import api_router as like_router
 from comment_app.api.router import api_router as comment_router
 from user_app.api.router import api_router as user_router
 from follower_app.api.router import api_router as follower_router
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,6 +51,8 @@ urlpatterns = [
     path('', include(comment_router.urls)),
     path('', include(user_router.urls)),
     path('', include(follower_router.urls)),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

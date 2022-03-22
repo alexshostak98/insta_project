@@ -32,3 +32,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_followers_count(self, instance) -> int:
         return instance.followers.count()
+
+
+class CreateUserSerializer(UserSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
