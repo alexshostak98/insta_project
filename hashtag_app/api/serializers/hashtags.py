@@ -5,7 +5,7 @@ from ...models import HashTag
 class HashTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = HashTag
-        exclude = ['post']
+        exclude = ['post', 'comment']
 
     posts_count = serializers.SerializerMethodField()
 
