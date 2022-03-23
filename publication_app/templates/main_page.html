@@ -1,0 +1,26 @@
+{% load hashtags_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div>
+    <form action="/add-publication/" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Add post">
+    </form>
+</div>
+<div>{% hashtags_cloud %}</div>
+<div>
+    {% for post in posts %}
+        <h2>{{post.title}}</h2>
+        {% if post.file %}
+            <div><img src="{{post.file.url}}"></div>
+        {% endif %}
+        <div>{{post.text}}</div>
+    {% endfor %}
+</div>
+</body>
+</html>

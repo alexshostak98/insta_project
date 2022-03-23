@@ -1,0 +1,5 @@
+{% for tag in tags %}
+    <div>
+        <a href="tag/{{tag.title}}/">#{{ tag.title }} ({{ tag.cnt }})</a>
+    </div>
+{% endfor %}
